@@ -9,7 +9,7 @@ import    java.io.Serializable;
 import    java.util.Date;
 </#if>
 <#if tableInfo.includeDecimal>
-import    java.match.BigDecimal;
+import    java.math.BigDecimal;
 </#if>
 /***
  *
