@@ -66,6 +66,13 @@ public interface BaseDao<PK, PO, QO> {
      */
 	int deleteById(PK pk);
 
+    /**
+     * 根据指定条件删除记录
+     * @param qo 条件
+     * @return
+     */
+    int deleteByParam(QO qo);
+
 
 	/***
      * 根据参数分页查询记录列表
@@ -89,5 +96,4 @@ public interface BaseDao<PK, PO, QO> {
      * @return
      */
     List<PK> queryPkListByParam(QO qo);
-
 }

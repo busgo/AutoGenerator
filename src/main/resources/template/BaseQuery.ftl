@@ -19,4 +19,8 @@ public class BaseQuery implements Serializable {
 
     private Integer rows;
 
+    private int pageNo=1;
+
+    private int pageSize=10;
+
 }

@@ -90,6 +90,15 @@ public class ${tableInfo.modelName}Service implements BaseService<${tableInfo.pk
 		return this.${tableInfo.modelName?uncap_first}Dao.deleteById(${tableInfo.pkFieldName});
 	}
 
+    /**
+     * 根据指定条件删除记录
+     * @param qo 条件
+     * @return
+     */
+    public int deleteByParam(${tableInfo.modelName}Query query){
+       return this.${tableInfo.modelName?uncap_first}Dao.deleteByParam(query);
+    }
+
 
 	/**
      * 根据参数分页查询记录列表

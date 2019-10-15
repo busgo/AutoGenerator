@@ -89,4 +89,12 @@ public interface BaseService<PK, PO, QO> {
      */
     List<PK> queryPkListByParam(QO qo);
 
+
+    /**
+    * 根据指定条件删除记录
+    * @param qo 条件
+    * @return
+    */
+    int deleteByParam(QO qo);
+
 }

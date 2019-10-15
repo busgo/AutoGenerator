@@ -51,7 +51,7 @@ public class AutoGenerator {
     public static void main(String[] args) throws Exception {
 
         // 数据库配置信息
-        String url = "jdbc:mysql://127.0.0.1:3306/stock?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
+        String url = "jdbc:mysql://127.0.0.1:3306/grass?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
         String userName = "root";
         String password = "123456";
         String driverClass = "com.mysql.jdbc.Driver";
@@ -60,14 +60,13 @@ public class AutoGenerator {
 
 
         List<String> tables = new ArrayList<String>();
-
-        tables.add("app_properties");
+       //tables.add("video");
         // 代码生成配置
         configInfo = new ConfigInfo()
-                .daoPackage("com.busgo.stock.inner.dao")
-                .servicePackage("com.busgo.stock.inner.service")
-                .modelPackage("com.busgo.stock.inner.model")
-                .queryPackage("com.busgo.stock.inner.query").dataBaseInfo(dataBaseInfo).tables(tables).saveDir("stock");
+                .daoPackage("com.busgo.pig.inner.dao")
+                .servicePackage("com.busgo.pig.inner.service")
+                .modelPackage("com.busgo.pig.inner.model")
+                .queryPackage("com.busgo.pig.inner.query").dataBaseInfo(dataBaseInfo).saveDir("pig").tables(tables);
 
 
         MetaDataHandler handler = new MetaDataHandler(dataBaseInfo.getConnection(), configInfo.getTables());

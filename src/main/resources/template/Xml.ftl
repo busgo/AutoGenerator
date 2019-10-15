@@ -112,6 +112,15 @@
         DELETE FROM `${tableInfo.tableName}` WHERE `${tableInfo.pkColumnName}` = <#noparse>#</#noparse>{${tableInfo.pkFieldName}} limit 1
     </delete>
 
+    <select id="deleteByParam" parameterType="map">
+        DELETE
+        FROM `${tableInfo.tableName}`
+        <where>
+            <include refid="_common_where"/>
+        </where>
+        <include refid="_page_field"/>
+    </select>
+
     <update id="updateById">
         UPDATE `${tableInfo.tableName}`
         <trim prefix="SET" suffixOverrides="," prefixOverrides=",">
