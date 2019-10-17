@@ -60,7 +60,7 @@ public class AutoGenerator {
 
 
         List<String> tables = new ArrayList<String>();
-       //tables.add("video");
+       tables.add("video");
         // 代码生成配置
         configInfo = new ConfigInfo()
                 .daoPackage("com.busgo.pig.inner.dao")
