@@ -24,8 +24,13 @@ public class ${tableInfo.modelName}Query extends BaseQuery {
 	private ${field.fieldType} ${field.fieldName};
 
 </#list>
-    private List<${tableInfo.pkFieldType?cap_first}> include${tableInfo.pkFieldName?cap_first}List;
+<#list  tableInfo.fieldInfoList as field>
+	// include ${field.remark}
+	private List<${field.fieldType}}> include${field.fieldName?cap_first}List;
 
-    private List<${tableInfo.pkFieldType?cap_first}> exclude${tableInfo.pkFieldName?cap_first}List;
+    // exclude ${field.remark}
+    private List<${field.fieldType}> exclude${field.fieldName?cap_first}List;
+
+</#list>
 
 }

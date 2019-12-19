@@ -43,18 +43,32 @@
  <#list  tableInfo.fieldInfoList as field >
      <if test="${field.fieldName} !=null">AND `${field.columnName}`=<#noparse>#</#noparse>{${field.fieldName}}</if>
  </#list>
-     <if test="include${tableInfo.pkFieldName?cap_first}List !=null">
-         AND `${tableInfo.pkColumnName}` IN
-         <foreach collection="include${tableInfo.pkFieldName?cap_first}List" item="item" open="(" close=")" separator=",">
-            <#noparse>#</#noparse>{item}
-         </foreach>
-     </if>
-        <if test="exclude${tableInfo.pkFieldName?cap_first}List !=null">
-            AND `${tableInfo.pkColumnName}` NOT IN
-            <foreach collection="exclude${tableInfo.pkFieldName?cap_first}List" item="item" open="(" close=")" separator=",">
-                <#noparse>#</#noparse>{item}
+        <if test="include${tableInfo.pkFieldName?cap_first}List !=null and include${tableInfo.pkFieldName?cap_first}List.size()>0">
+            AND `${tableInfo.pkColumnName}` IN
+            <foreach collection="include${tableInfo.pkFieldName?cap_first}List" item="item" open="(" close=")" separator=",">
+                    <#noparse>#</#noparse>{item}
             </foreach>
         </if>
+        <if test="exclude${tableInfo.pkFieldName?cap_first}List !=null and exclude${tableInfo.pkFieldName?cap_first}List.size()>0">
+            AND `${tableInfo.pkColumnName}` NOT IN
+            <foreach collection="exclude${tableInfo.pkFieldName?cap_first}List" item="item" open="(" close=")" separator=",">
+                    <#noparse>#</#noparse>{item}
+            </foreach>
+        </if>
+         <#list tableInfo.fieldInfoList as field >
+          <if test="include${field.fieldName?cap_first}List !=null and include${field.fieldName?cap_first}List.size()>0">
+              AND `${field.columnName}` IN
+              <foreach collection="include${field.fieldName?cap_first}List" item="item" open="(" close=")" separator=",">
+                     <#noparse>#</#noparse>{item}
+              </foreach>
+          </if>
+        <if test="exclude${field.fieldName?cap_first}List !=null and exclude${field.fieldName?cap_first}List.size() >0">
+            AND `${field.columnName}` NOT IN
+            <foreach collection="exclude${field.fieldName?cap_first}List" item="item" open="(" close=")" separator=",">
+                     <#noparse>#</#noparse>{item}
+            </foreach>
+        </if>
+         </#list>
     </sql>
 
     <sql id="_common_sort">
@@ -90,7 +104,9 @@
         </trim>
         VALUES
         <foreach collection="list" item="item" separator=",">
-            (<include refid="_batch_value_list"/>)
+            (
+            <include refid="_batch_value_list"/>
+            )
         </foreach>
     </insert>
 
@@ -101,7 +117,8 @@
         WHERE `${tableInfo.pkColumnName}` = <#noparse>#</#noparse>{${tableInfo.pkFieldName}} limit 1
     </select>
 
-    <select id="selectByIdForUpdate" parameterType="java.lang.${tableInfo.pkFieldType}" resultMap="${tableInfo.modelName}Map">
+    <select id="selectByIdForUpdate" parameterType="java.lang.${tableInfo.pkFieldType}"
+            resultMap="${tableInfo.modelName}Map">
         SELECT
         <include refid="_field_list"/>
         FROM `${tableInfo.tableName}`
@@ -128,7 +145,7 @@
         <#if field.columnName !=tableInfo.pkColumnName >
             <if test="${field.fieldName} !=null">`${field.columnName}`=<#noparse>#</#noparse>{${field.fieldName}},</if>
         </#if>
-    </#list>
+</#list>
         </trim>
         WHERE `${tableInfo.pkColumnName}`=<#noparse>#</#noparse>{${tableInfo.pkFieldName}} LIMIT 1
     </update>
