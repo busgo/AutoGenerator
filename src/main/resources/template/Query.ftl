@@ -26,7 +26,7 @@ public class ${tableInfo.modelName}Query extends BaseQuery {
 </#list>
 <#list  tableInfo.fieldInfoList as field>
 	// include ${field.remark}
-	private List<${field.fieldType}}> include${field.fieldName?cap_first}List;
+	private List<${field.fieldType}> include${field.fieldName?cap_first}List;
 
     // exclude ${field.remark}
     private List<${field.fieldType}> exclude${field.fieldName?cap_first}List;

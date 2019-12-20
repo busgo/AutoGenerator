@@ -45,20 +45,23 @@
  </#list>
         <if test="include${tableInfo.pkFieldName?cap_first}List !=null and include${tableInfo.pkFieldName?cap_first}List.size()>0">
             AND `${tableInfo.pkColumnName}` IN
-            <foreach collection="include${tableInfo.pkFieldName?cap_first}List" item="item" open="(" close=")" separator=",">
+            <foreach collection="include${tableInfo.pkFieldName?cap_first}List" item="item" open="(" close=")"
+                     separator=",">
                     <#noparse>#</#noparse>{item}
             </foreach>
         </if>
         <if test="exclude${tableInfo.pkFieldName?cap_first}List !=null and exclude${tableInfo.pkFieldName?cap_first}List.size()>0">
             AND `${tableInfo.pkColumnName}` NOT IN
-            <foreach collection="exclude${tableInfo.pkFieldName?cap_first}List" item="item" open="(" close=")" separator=",">
+            <foreach collection="exclude${tableInfo.pkFieldName?cap_first}List" item="item" open="(" close=")"
+                     separator=",">
                     <#noparse>#</#noparse>{item}
             </foreach>
         </if>
          <#list tableInfo.fieldInfoList as field >
           <if test="include${field.fieldName?cap_first}List !=null and include${field.fieldName?cap_first}List.size()>0">
               AND `${field.columnName}` IN
-              <foreach collection="include${field.fieldName?cap_first}List" item="item" open="(" close=")" separator=",">
+              <foreach collection="include${field.fieldName?cap_first}List" item="item" open="(" close=")"
+                       separator=",">
                      <#noparse>#</#noparse>{item}
               </foreach>
           </if>
@@ -126,7 +129,8 @@
     </select>
 
     <delete id="deleteById" parameterType="java.lang.${tableInfo.pkFieldType}">
-        DELETE FROM `${tableInfo.tableName}` WHERE `${tableInfo.pkColumnName}` = <#noparse>#</#noparse>{${tableInfo.pkFieldName}} limit 1
+        DELETE FROM `${tableInfo.tableName}` WHERE `${tableInfo.pkColumnName}` = <#noparse>#</#noparse>
+        {${tableInfo.pkFieldName}} limit 1
     </delete>
 
     <delete id="deleteByParam" parameterType="map">
@@ -155,13 +159,17 @@
         <trim prefix="SET" suffixOverrides="," prefixOverrides=",">
 <#list  tableInfo.fieldInfoList as field >
         <#if field.columnName !=tableInfo.pkColumnName >
-            <if test="po.${field.fieldName} !=null">`${field.columnName}`=<#noparse>#</#noparse>{po.${field.fieldName}},</if>
+            <if test="po.${field.fieldName} !=null">`${field.columnName}`=<#noparse>#</#noparse>{po.${field.fieldName}
+                },
+            </if>
         </#if>
 </#list>
         </trim>
         <where>
         <#list  tableInfo.fieldInfoList as field >
-            <if test="query.${field.fieldName} !=null">AND `${field.columnName}`=<#noparse>#</#noparse>{query.${field.fieldName}}</if>
+            <if test="query.${field.fieldName} !=null">AND `${field.columnName}`=<#noparse>#</#noparse>
+                {query.${field.fieldName}}
+            </if>
         </#list>
         </where>
     </update>
@@ -186,6 +194,7 @@
         </where>
     </select>
 
+    <!--pk field list search-->
     <select id="queryPkListByParam" parameterType="map" resultType="java.lang.${tableInfo.pkFieldType}">
         SELECT
         `${tableInfo.pkColumnName}`
@@ -197,4 +206,36 @@
         <include refid="_page_field"/>
     </select>
 
+    <!--single field list search-->
+    <#list  tableInfo.fieldInfoList as field >
+        <#if field.fieldType=="BigDecimal">
+            <#assign fieldReturnType = "java.math.BigDecimal"/>
+        <#elseif field.fieldType = "Date">
+            <#assign fieldReturnType = "java.util.Date"/>
+        <#else>
+            <#assign fieldReturnType = "java.lang.${field.fieldType}"/>
+        </#if>
+    <select id="query${field.fieldName?cap_first}ListByParam" parameterType="map" resultType="${fieldReturnType}">
+        SELECT DISTINCT(`${field.columnName}`) FROM `${tableInfo.tableName}`
+        <where>
+            <include refid="_common_where"/>
+        </where>
+        <include refid="_common_sort"/>
+        <include refid="_page_field"/>
+    </select>
+
+    </#list>
+
+    <!--single field Count search-->
+     <#list  tableInfo.fieldInfoList as field >
+    <select id="query${field.fieldName?cap_first}CountByParam" parameterType="map" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT(`${field.columnName}`)) FROM `${tableInfo.tableName}`
+        <where>
+            <include refid="_common_where"/>
+        </where>
+        <include refid="_common_sort"/>
+        <include refid="_page_field"/>
+    </select>
+
+     </#list>
 </mapper>

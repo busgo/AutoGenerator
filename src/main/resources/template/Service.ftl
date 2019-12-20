@@ -5,6 +5,12 @@ import	${queryPackage}.${tableInfo.modelName}Query;
 import	${daoPackage}.${tableInfo.modelName}Dao;
 import	org.springframework.stereotype.Service;
 
+<#if tableInfo.includeDateType>
+import    java.util.Date;
+</#if>
+<#if tableInfo.includeDecimal>
+import    java.math.BigDecimal;
+</#if>
 
 import	javax.annotation.Resource;
 import	java.util.List;
@@ -128,5 +134,29 @@ public class ${tableInfo.modelName}Service implements BaseService<${tableInfo.pk
     public List<${tableInfo.pkFieldType}> queryPkListByParam(${tableInfo.modelName}Query query){
            return this.${tableInfo.modelName?uncap_first}Dao.queryPkListByParam(query);
     }
+
+
+<#list  tableInfo.fieldInfoList as field >
+     /***
+     * 根据查询条件查询${field.remark}列表
+     * @param query 查询条件
+     * @return
+     */
+    public List<${field.fieldType}> query${field.fieldName?cap_first}ListByParam(${tableInfo.modelName}Query query){
+           return this.${tableInfo.modelName?uncap_first}Dao.query${field.fieldName?cap_first}ListByParam(query);
+    }
+</#list>
+
+<#list  tableInfo.fieldInfoList as field >
+     /***
+     * 根据查询条件查询${field.remark}总数
+     * @param query 查询条件
+     * @return
+     */
+    public List<${field.fieldType}> query${field.fieldName?cap_first}CountByParam(${tableInfo.modelName}Query query){
+           return this.${tableInfo.modelName?uncap_first}Dao.query${field.fieldName?cap_first}CountByParam(query);
+    }
+</#list>
+
 
 }
