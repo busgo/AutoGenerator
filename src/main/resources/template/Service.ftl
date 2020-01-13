@@ -153,7 +153,7 @@ public class ${tableInfo.modelName}Service implements BaseService<${tableInfo.pk
      * @param query 查询条件
      * @return
      */
-    public List<${field.fieldType}> query${field.fieldName?cap_first}CountByParam(${tableInfo.modelName}Query query){
+    public int  query${field.fieldName?cap_first}CountByParam(${tableInfo.modelName}Query query){
            return this.${tableInfo.modelName?uncap_first}Dao.query${field.fieldName?cap_first}CountByParam(query);
     }
 </#list>
