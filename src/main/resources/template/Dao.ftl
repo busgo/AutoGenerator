@@ -33,7 +33,7 @@ public interface ${tableInfo.modelName}Dao extends BaseDao<${tableInfo.pkFieldTy
      * @param query 查询条件
      * @return
      */
-    public List<${field.fieldType}> query${field.fieldName?cap_first}CountByParam(${tableInfo.modelName}Query query);
+     int query${field.fieldName?cap_first}CountByParam(${tableInfo.modelName}Query query);
 
 </#list>
 

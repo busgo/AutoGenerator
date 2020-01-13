@@ -233,8 +233,6 @@
         <where>
             <include refid="_common_where"/>
         </where>
-        <include refid="_common_sort"/>
-        <include refid="_page_field"/>
     </select>
 
      </#list>
