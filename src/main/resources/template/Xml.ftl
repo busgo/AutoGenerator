@@ -158,9 +158,7 @@
         <trim prefix="SET" suffixOverrides="," prefixOverrides=",">
 <#list  tableInfo.fieldInfoList as field >
         <#if field.columnName !=tableInfo.pkColumnName >
-            <if test="po.${field.fieldName} !=null">`${field.columnName}`=<#noparse>#</#noparse>{po.${field.fieldName}
-                },
-            </if>
+            <if test="po.${field.fieldName} !=null">`${field.columnName}`=<#noparse>#</#noparse>{po.${field.fieldName}},</if>
         </#if>
 </#list>
         </trim>
