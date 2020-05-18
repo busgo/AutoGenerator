@@ -1,5 +1,6 @@
 package   ${modelPackage};
 
+import    lombok.AllArgsConstructor;
 import    lombok.Builder;
 import    lombok.Data;
 import    lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ import    java.math.BigDecimal;
 @ToString(callSuper = true)
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class ${tableInfo.modelName} implements Serializable {
 
 
