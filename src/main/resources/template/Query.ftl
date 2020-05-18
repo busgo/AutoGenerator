@@ -1,6 +1,8 @@
 package    ${queryPackage};
 
+import    lombok.Builder;
 import    lombok.Data;
+import    lombok.NoArgsConstructor;
 import    lombok.ToString;
 
 <#if tableInfo.includeDateType>
@@ -16,6 +18,8 @@ import    java.util.List;
  */
 @Data
 @ToString(callSuper = true)
+@Builder
+@NoArgsConstructor
 public class ${tableInfo.modelName}Query extends BaseQuery {
 
 

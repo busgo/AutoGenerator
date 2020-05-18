@@ -1,6 +1,8 @@
 package	${queryPackage};
 
-import	lombok.Data;
+import	lombok.Builder;
+import  lombok.Data;
+import  lombok.NoArgsConstructor;
 
 import	java.io.Serializable;
 import	java.util.List;
@@ -10,6 +12,8 @@ import	java.util.List;
  * @author Create By AutoGenerator
  */
 @Data
+@Builder
+@NoArgsConstructor
 public class BaseQuery implements Serializable {
 
 
