@@ -14,6 +14,7 @@ import	java.io.Serializable;
 @ToString(callSuper = true)
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class SortMode implements Serializable {
 
 
