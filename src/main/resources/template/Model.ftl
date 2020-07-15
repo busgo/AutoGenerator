@@ -4,7 +4,6 @@ import    lombok.AllArgsConstructor;
 import    lombok.Builder;
 import    lombok.Data;
 import    lombok.NoArgsConstructor;
-import    lombok.ToString;
 
 import    java.io.Serializable;
 
@@ -19,7 +18,6 @@ import    java.math.BigDecimal;
  * @author Create By AutoGenerator
  */
 @Data
-@ToString(callSuper = true)
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

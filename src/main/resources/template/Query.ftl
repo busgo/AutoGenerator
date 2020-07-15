@@ -1,10 +1,7 @@
 package    ${queryPackage};
 
-import    lombok.AllArgsConstructor;
-import    lombok.Builder;
 import    lombok.Data;
-import    lombok.NoArgsConstructor;
-import    lombok.ToString;
+
 
 <#if tableInfo.includeDateType>
 import    java.util.Date;
@@ -18,10 +15,6 @@ import    java.util.List;
  * @author Create By AutoGenerator
  */
 @Data
-@ToString(callSuper = true)
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class ${tableInfo.modelName}Query extends BaseQuery {
 
 
