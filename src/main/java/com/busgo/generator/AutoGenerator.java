@@ -51,7 +51,7 @@ public class AutoGenerator {
     public static void main(String[] args) throws Exception {
 
         // 数据库配置信息
-        String url = "jdbc:mysql://127.0.0.1:3306/bull?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
+        String url = "jdbc:mysql://127.0.0.1:3306/ball?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
         String userName = "root";
         String password = "123456";
         String driverClass = "com.mysql.jdbc.Driver";
@@ -60,13 +60,13 @@ public class AutoGenerator {
 
 
         List<String> tables = new ArrayList<String>();
-        tables.add("member_wallet_record");
+        tables.add("user_entrust_order");
         // 代码生成配置
         configInfo = new ConfigInfo()
-                .daoPackage("com.busgo.bull.account.inner.dao")
-                .servicePackage("com.busgo.bull.account.inner.service")
-                .modelPackage("com.busgo.bull.account.inner.model")
-                .queryPackage("com.busgo.bull.account.inner.query").dataBaseInfo(dataBaseInfo).saveDir("bull").tables(tables);
+                .daoPackage("com.busgo.ball.inner.dao")
+                .servicePackage("com.busgo.ball.inner.service")
+                .modelPackage("com.busgo.ball.inner.model")
+                .queryPackage("com.busgo.ball.inner.query").dataBaseInfo(dataBaseInfo).saveDir("ball").tables(tables);
 
 
         MetaDataHandler handler = new MetaDataHandler(dataBaseInfo.getConnection(), configInfo.getTables());

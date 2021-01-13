@@ -58,7 +58,7 @@ public class GeneratorUtils {
 
         if (jdbcType.equals("CHAR") || jdbcType.equals("VARCHAR") || jdbcType.equals("LONGVARCHAR") || jdbcType.equals("TEXT")||jdbcType.equals("LONGTEXT")|| jdbcType.equals("VARBINARY")) {
             return "String";
-        } else if (jdbcType.equals("NUMERIC") || jdbcType.equals("DECIMAL")) {
+        } else if (jdbcType.equals("NUMERIC") || jdbcType.equals("DECIMAL") || jdbcType.equals("DECIMAL UNSIGNED")) {
             return "BigDecimal";
         } else if (jdbcType.equals("BIT") || jdbcType.equals("BOOLEAN")) {
             return "Boolean";
